@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">QuizActivity</string>
+    <string name="true_button">True</string>
+    <string name="false_button">False</string>
+    <string name="correct_toast">Correct!</string>
+    <string name="incorrect_toast">Incorrect!</string>
+    <string name="nextQuestionButton">Next</string>
+    <string name="previousQuestionButton">Previous</string>
+
+    <string name="questionOcean">The ocean is 1234 ft deep at the deepest point.</string>
+    <string name="questionAnimal">There are 5678 animals in the animal kingdom.</string>
+    <string name="questionSkyscraper">The tallest skyscraper is really tall.</string>
+    <string name="questionMovie">The first movie released in theater was named "The First Movie Ever Released in Theaters"</string>
+    <string name="questionInternet">Santa Claus is credited as the father of modern cybersecurity.</string>
+</resources>
