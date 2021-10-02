@@ -13,6 +13,7 @@ public class TrueFalseManager {
     private final ArrayList<TrueFalse> trueFalseArray;
     private int arrayIndex = -1;
     private static final String TAG = "TrueFalseManager";
+
     public TrueFalseManager(ArrayList<TrueFalse> trueFalseArray) {
         this.trueFalseArray = trueFalseArray;
     }
@@ -34,36 +35,38 @@ public class TrueFalseManager {
     }
 
     //Displays the next question in the array to the controller TextView, and notifies the user if there are no more questions
-    public int nextQuestion() {
-        int questionNumber;
-        if (!(arrayIndex > trueFalseArray.size() - 1)) {
+    public int nextQuestionID() {
+        int questionID;
+        if (!(arrayIndex == trueFalseArray.size() - 1)) {
             arrayIndex++;
-            questionNumber = trueFalseArray.get(arrayIndex).getQuestion();
+            TrueFalse nextQuestion = trueFalseArray.get(arrayIndex);
+            questionID = nextQuestion.getQuestionID();
         }
         else {
             Log.i(TAG, "User attempted to access NEXT question OOB");
             return -1;
         }
-        return questionNumber;
+        return questionID;
     }
 
     //Displays the previous question in the array to the controller TextView, and notifies the user if there are no more questions
-    public int previousQuestion() {
-        int questionNumber;
+    public int previousQuestionID() {
+        int questionID;
         if (arrayIndex != 0) {
             arrayIndex--;
-            questionNumber = trueFalseArray.get(arrayIndex).getQuestion();
+            TrueFalse nextQuestion = trueFalseArray.get(arrayIndex);
+            questionID = nextQuestion.getQuestionID();
         }
         else {
             Log.i(TAG, "User attempted to access PREVIOUS question OOB");
             return -1;
         }
-        return questionNumber;
+        return questionID;
     }
 
     //returns true if the answer is correct and false if it is not
     public boolean checkAnswer(boolean userAnswer) {
-        TrueFalse currentQuestion = trueFalseArray.get(arrayIndex - 1);
+        TrueFalse currentQuestion = trueFalseArray.get(arrayIndex);
         boolean answer = currentQuestion.isTrueQuestion();
         return userAnswer == answer;
     }

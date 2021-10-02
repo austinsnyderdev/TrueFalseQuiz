@@ -2,22 +2,22 @@ package dev.austinsnyder.quizactivity;
 
 public class TrueFalse {
     //Takes in question id #
-    private int question;
+    private int questionID;
 
     //Whether the question is true or false
     private boolean trueQuestion;
 
-    public TrueFalse(int question, boolean trueQuestion) {
-        this.question = question;
+    public TrueFalse(int questionID, boolean trueQuestion) {
+        this.questionID = questionID;
         this.trueQuestion = trueQuestion;
     }
 
-    public int getQuestion() {
-        return question;
+    public int getQuestionID() {
+        return questionID;
     }
 
-    public void setQuestion(int question) {
-        this.question = question;
+    public void setQuestionID(int questionID) {
+        this.questionID = questionID;
     }
 
     public boolean isTrueQuestion() {
