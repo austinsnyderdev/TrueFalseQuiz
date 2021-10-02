@@ -1,35 +1,45 @@
 package dev.austinsnyder.quizactivity;
 
-//page 21
+//page 21 -> 66
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import dev.austinsnyder.quizactivity.databinding.ActivityMainBinding;
+
 public class MainActivity extends AppCompatActivity {
+
+    private static final String TAG = "MainActivity";
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        Log.d(TAG, "onCreate(Bundle) called");
+
+        this.initializeViewBinding();
 
         TrueFalseManager trueFalseManager = new TrueFalseManager();
         trueFalseManager.fillTrueFalseArray();
 
-        TextView questionTextView = findViewById(R.id.questionTextView);
-        questionTextView.setText(trueFalseManager.nextQuestion());
+        binding.questionTextView.setText(trueFalseManager.nextQuestionID());
+        binding.questionTextView.setOnClickListener(v -> binding.questionTextView.setText(trueFalseManager.nextQuestionID()));
 
-        questionTextView.setOnClickListener(v -> questionTextView.setText(trueFalseManager.nextQuestion()));
+        this.buttonListeners(trueFalseManager);
 
-        Button trueButton = (Button) findViewById(R.id.trueButton);
-        Button falseButton = (Button) findViewById(R.id.falseButton);
+    }
 
-        trueButton.setOnClickListener(v -> {
+    private void initializeViewBinding() {
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+    }
+
+    private void buttonListeners(TrueFalseManager trueFalseManager) {
+        binding.trueButton.setOnClickListener(v -> {
             boolean userAnsweredCorrectly = trueFalseManager.checkAnswer(true);
             if (userAnsweredCorrectly) {
                 Toast.makeText(MainActivity.this, R.string.correct_toast, Toast.LENGTH_SHORT).show();
@@ -39,27 +49,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        falseButton.setOnClickListener(v -> {
-                boolean userAnsweredCorrectly = trueFalseManager.checkAnswer(false);
-                if (userAnsweredCorrectly) {
-                    Toast.makeText(MainActivity.this, R.string.correct_toast, Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Toast.makeText(MainActivity.this, R.string.incorrect_toast, Toast.LENGTH_SHORT).show();
-                }
+        binding.falseButton.setOnClickListener(v -> {
+            boolean userAnsweredCorrectly = trueFalseManager.checkAnswer(false);
+            if (userAnsweredCorrectly) {
+                Toast.makeText(MainActivity.this, R.string.correct_toast, Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Toast.makeText(MainActivity.this, R.string.incorrect_toast, Toast.LENGTH_SHORT).show();
+            }
         });
 
-        Button nextButton = findViewById(R.id.nextButton);
-        nextButton.setOnClickListener(v -> {
-            int nextQuestionId = trueFalseManager.nextQuestion();
-            if (nextQuestionId != -1) questionTextView.setText(nextQuestionId);
+        binding.nextButton.setOnClickListener(v -> {
+            int nextQuestionId = trueFalseManager.nextQuestionID();
+            if (nextQuestionId != -1) binding.questionTextView.setText(nextQuestionId);
         });
-
-        Button previousButton = findViewById(R.id.previousButton);
-        previousButton.setOnClickListener(v -> {
-            int previousQuestionId = trueFalseManager.previousQuestion();
-            if (previousQuestionId != -1) questionTextView.setText(previousQuestionId);
+        binding.previousButton.setOnClickListener(v -> {
+            int previousQuestionId = trueFalseManager.previousQuestionID();
+            if (previousQuestionId != -1) binding.questionTextView.setText(previousQuestionId);
         });
-
     }
 }
