@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public class TrueFalseManager {
 
     private final ArrayList<TrueFalse> trueFalseArray;
-    private int arrayIndex = -1;
     private static final String TAG = "TrueFalseManager";
+    protected int arrayIndex = 0;
 
     public TrueFalseManager(ArrayList<TrueFalse> trueFalseArray) {
         this.trueFalseArray = trueFalseArray;
@@ -34,6 +34,10 @@ public class TrueFalseManager {
         return trueFalseArray;
     }
 
+
+    public int updateQuestionID() {
+        return trueFalseArray.get(arrayIndex).getQuestionID();
+    }
     //Displays the next question in the array to the controller TextView, and notifies the user if there are no more questions
     public int nextQuestionID() {
         int questionID;
@@ -41,8 +45,7 @@ public class TrueFalseManager {
             arrayIndex++;
             TrueFalse nextQuestion = trueFalseArray.get(arrayIndex);
             questionID = nextQuestion.getQuestionID();
-        }
-        else {
+        } else {
             Log.i(TAG, "User attempted to access NEXT question OOB");
             return -1;
         }

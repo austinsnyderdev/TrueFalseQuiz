@@ -1,6 +1,7 @@
 package dev.austinsnyder.quizactivity;
 
 //page 21 -> 66
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -15,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private ActivityMainBinding binding;
+    private static final String KEY_INDEX = "index";
+    private TrueFalseManager trueFalseManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,14 +26,20 @@ public class MainActivity extends AppCompatActivity {
 
         this.initializeViewBinding();
 
-        TrueFalseManager trueFalseManager = new TrueFalseManager();
+        //Problem right now is that the onCreate is being called correctly with the savedInstanceState bundle, everything is being initialized and the question is being set to the index of -1 and THEN the index is being set correctly
+        trueFalseManager = new TrueFalseManager();
         trueFalseManager.fillTrueFalseArray();
 
-        binding.questionTextView.setText(trueFalseManager.nextQuestionID());
+        if (savedInstanceState != null) {
+            trueFalseManager.arrayIndex = savedInstanceState.getInt(KEY_INDEX, -1);
+        }
+
+        binding.questionTextView.setText(trueFalseManager.updateQuestionID());
+        Log.i(TAG, "SetText called");
+
         binding.questionTextView.setOnClickListener(v -> binding.questionTextView.setText(trueFalseManager.nextQuestionID()));
 
         this.buttonListeners(trueFalseManager);
-
     }
 
     private void initializeViewBinding() {
@@ -67,5 +76,12 @@ public class MainActivity extends AppCompatActivity {
             int previousQuestionId = trueFalseManager.previousQuestionID();
             if (previousQuestionId != -1) binding.questionTextView.setText(previousQuestionId);
         });
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.i(TAG, "onSaveInstanceState called");
+        outState.putInt(KEY_INDEX, trueFalseManager.arrayIndex);
     }
 }
