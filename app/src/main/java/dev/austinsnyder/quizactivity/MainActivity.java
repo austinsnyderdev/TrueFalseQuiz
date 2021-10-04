@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
         this.initializeViewBinding();
 
-        //Problem right now is that the onCreate is being called correctly with the savedInstanceState bundle, everything is being initialized and the question is being set to the index of -1 and THEN the index is being set correctly
         trueFalseManager = new TrueFalseManager();
         trueFalseManager.fillTrueFalseArray();
 
