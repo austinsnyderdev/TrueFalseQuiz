@@ -10,9 +10,10 @@ import java.util.ArrayList;
 
 public class TrueFalseManager {
 
-    private final ArrayList<TrueFalse> trueFalseArray;
     private static final String TAG = "TrueFalseManager";
+    //TODO: find a way to maintain arrayIndex through onCreate calls
     protected int arrayIndex = 0;
+    protected final ArrayList<TrueFalse> trueFalseArray;
 
     public TrueFalseManager(ArrayList<TrueFalse> trueFalseArray) {
         this.trueFalseArray = trueFalseArray;
@@ -38,6 +39,7 @@ public class TrueFalseManager {
     public int updateQuestionID() {
         return trueFalseArray.get(arrayIndex).getQuestionID();
     }
+
     //Displays the next question in the array to the controller TextView, and notifies the user if there are no more questions
     public int nextQuestionID() {
         int questionID;
@@ -59,8 +61,7 @@ public class TrueFalseManager {
             arrayIndex--;
             TrueFalse nextQuestion = trueFalseArray.get(arrayIndex);
             questionID = nextQuestion.getQuestionID();
-        }
-        else {
+        } else {
             Log.i(TAG, "User attempted to access PREVIOUS question OOB");
             return -1;
         }

@@ -55,4 +55,12 @@
             android:text="@string/nextQuestionButton"
             />
     </LinearLayout>
+    <Button
+        android:id="@+id/cheatButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginTop="16dp"
+        android:text="@string/cheatButton"
+        />
 </LinearLayout>

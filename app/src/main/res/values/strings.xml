@@ -12,4 +12,11 @@
     <string name="questionSkyscraper">The tallest skyscraper is really tall.</string>
     <string name="questionMovie">The first movie released in theater was named "The First Movie Ever Released in Theaters"</string>
     <string name="questionInternet">Santa Claus is credited as the father of modern cybersecurity.</string>
+    <string name="cheatButton">Cheat!</string>
+    <string name="cheatingWrong">You\'re correct, but cheating is wrong.</string>
+    <string name="warningText">Are you sure you want to do this?</string>
+    <string name="showAnswer">Show answer.</string>
+    <string name="backButton">Back</string>
+    <string name="questionPlaceholder">Placeholder Text</string>
+
 </resources>
